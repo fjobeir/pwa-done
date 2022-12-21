@@ -78,7 +78,7 @@
                         </div>
                         <div>Profile</div>
                     </a>
-                    <a class="menuitem " href="#">
+                    <a class="menuitem " href="javascript:signout();">
                         <div class="icon">
                             <svg focusable="false" aria-hidden="true" viewBox="0 0 24 24" data-testid="LockIcon">
                                 <path
@@ -122,10 +122,14 @@
                 </div>
             </div>
             <div class="new-tweet">
-                <img src="https://www.ferasjobeir.com/storage/public/5UWBx5jiHKGQzbqeY1rXXA3LE3FFRPgMkdjiqj2q.jpg"
-                    alt="">
-                <div class="textarea"><textarea placeholder="What is happening?"></textarea><button
-                        class="btn btn-primary">Create Post</button></div>
+                <img src="https://www.ferasjobeir.com/storage/public/5UWBx5jiHKGQzbqeY1rXXA3LE3FFRPgMkdjiqj2q.jpg" alt="">
+                <form action="https://www.ferasjobeir.com/api/posts" method="post" class="w-100 ajaxForm" id="createPostForm" data-with-token="true" data-success-alert="true" data-reset-on-success="true">
+                    <div class="textarea">
+                        <textarea placeholder="What is happening?" name="content"></textarea>
+                        <button type="submit" class="btn btn-primary">Create Post</button>
+                    </div>
+                </form>
+                
             </div>
             <div class="mb-4" id="posts">
 

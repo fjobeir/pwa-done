@@ -3,7 +3,7 @@ dayjs.extend(window.dayjs_plugin_relativeTime)
 var isFetching = false
 var hasMore = true
 var currentPage = 1
-function createPost(post)
+function createPost(post, position = 'end')
 {
     var postInner = `
         <div class="postContent">
@@ -33,7 +33,11 @@ function createPost(post)
     post.setAttribute('class', 'post')
     post.setAttribute('id', `post-${post.id}`)
     post.innerHTML = postInner
-    posts.appendChild(post)
+    if (position == 'end') {
+        posts.appendChild(post)
+    } else {
+        posts.insertBefore(post, posts.firstChild);
+    }
 }
 
 
@@ -66,4 +70,8 @@ function fetchPosts(page)
         hasMore = currentPage < json.data.last_page
         loading.style.display = 'none'
     })
+}
+function postCreated(json)
+{
+    createPost(json.data, 'start')
 }

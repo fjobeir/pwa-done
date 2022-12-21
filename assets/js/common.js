@@ -2,6 +2,9 @@ var loading = document.getElementById('loading')
 var body = document.querySelector('body')
 var token = localStorage.getItem('token')
 var user = localStorage.getItem('user')
+if (user) {
+    user = JSON.parse(user)
+}
 
 if (body.classList.contains('protected') && !token) {
     window.location.href = '/login.html'
@@ -20,8 +23,8 @@ ajaxForms.forEach((form) => {
         var method = form.getAttribute('method')
         var requiresToken = form.getAttribute('data-with-token')
         var headers = {}
-        if (requiresToken) {
-            headers.Authorization = localStorage.getItem('token')
+        if (requiresToken == "true") {
+            headers.Authorization = 'Bearer ' + token
         }
         try {
             fetch(action, {
@@ -35,6 +38,12 @@ ajaxForms.forEach((form) => {
                         submitButton.disabled = false
                     }
                     if (json.success) {
+                        if (form.getAttribute('data-success-alert') == 'true') {
+                            createToast('success', `<div>${json.messages.join('</div><div>')}</div>`)
+                        }
+                        if (form.getAttribute('data-reset-on-success') == 'true') {
+                            form.reset()
+                        }
                         formSubmitted(json, formId)
                     } else {
                         createToast('danger', `<div>${json.messages.join('</div><div>')}</div>`)
@@ -52,6 +61,9 @@ function formSubmitted(json, formId) {
     switch (formId) {
         case 'loginForm':
             userHasLoggedIn(json)
+            break
+        case 'createPostForm':
+            postCreated(json)
             break
     }
 }
@@ -79,4 +91,10 @@ function createToast(type = 'primary', content = '') {
     toastElement.addEventListener('hidden.bs.toast', (e) => {
         toastContainer.parentNode.removeChild(toastContainer)
     })
+}
+function signout()
+{
+    localStorage.removeItem('token')
+    localStorage.removeItem('user')
+    window.location.href = '/login.html'
 }
