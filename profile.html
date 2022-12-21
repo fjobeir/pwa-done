@@ -1,0 +1,86 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@200;400;600&display=swap" rel="stylesheet">
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.2.3/dist/css/bootstrap.min.css" rel="stylesheet">
+    <link rel="stylesheet" href="assets/css/common.css">
+    <link rel="stylesheet" href="assets/css/style.css">
+</head>
+<body>
+    <div class="wrapper">
+        <header>
+            <nav>
+                <img width="60" class="mt-3 mb-1" src="assets/images/logo.svg" alt="Logo">
+                <div class="d-flex flex-column justify-content-start">
+                    <a aria-current="page" class="menuitem d-flex align-items-center" href="/index.html">
+                        <div class="icon">
+                            <svg focusable="false"
+                                aria-hidden="true" viewBox="0 0 24 24" data-testid="HomeIcon">
+                                <path d="M10 20v-6h4v6h5v-8h3L12 3 2 12h3v8z"></path>
+                            </svg>
+                        </div>
+                        <div>Home</div>
+                    </a>
+                    <a class="menuitem d-flex align-items-center" href="#">
+                        <div class="icon">
+                            <svg focusable="false" aria-hidden="true" viewBox="0 0 24 24" data-testid="MailIcon">
+                                <path d="M20 4H4c-1.1 0-1.99.9-1.99 2L2 18c0 1.1.9 2 2 2h16c1.1 0 2-.9 2-2V6c0-1.1-.9-2-2-2zm0 4-8 5-8-5V6l8 5 8-5v2z"></path>
+                            </svg>
+                        </div>
+                        <div>Messages</div>
+                    </a>
+                    <a class="menuitem d-flex align-items-center" href="#">
+                        <div class="icon">
+                            <svg focusable="false" aria-hidden="true" viewBox="0 0 24 24" data-testid="BookmarksIcon">
+                                <path d="m19 18 2 1V3c0-1.1-.9-2-2-2H8.99C7.89 1 7 1.9 7 3h10c1.1 0 2 .9 2 2v13zM15 5H5c-1.1 0-2 .9-2 2v16l7-3 7 3V7c0-1.1-.9-2-2-2z"></path>
+                            </svg>
+                        </div>
+                        <div>Bookmarks</div>
+                    </a>
+                    <a class="menuitem d-flex align-items-center" href="#">
+                        <div class="icon">
+                            <svg focusable="false" aria-hidden="true" viewBox="0 0 24 24" data-testid="ExploreIcon">
+                                <path d="M12 10.9c-.61 0-1.1.49-1.1 1.1s.49 1.1 1.1 1.1c.61 0 1.1-.49 1.1-1.1s-.49-1.1-1.1-1.1zM12 2C6.48 2 2 6.48 2 12s4.48 10 10 10 10-4.48 10-10S17.52 2 12 2zm2.19 12.19L6 18l3.81-8.19L18 6l-3.81 8.19z"></path>
+                            </svg>
+                        </div>
+                        <div>Explore</div>
+                    </a>
+                    <a class="menuitem d-flex align-items-center" href="#">
+                        <div class="icon">
+                            <svg focusable="false" aria-hidden="true" viewBox="0 0 24 24" data-testid="ViewListIcon">
+                                <path d="M3 14h4v-4H3v4zm0 5h4v-4H3v4zM3 9h4V5H3v4zm5 5h13v-4H8v4zm0 5h13v-4H8v4zM8 5v4h13V5H8z"></path>
+                            </svg>
+                        </div>
+                        <div>Lists</div>
+                    </a>
+                    <a class="menuitem d-flex align-items-center isActive" href="/profile.html">
+                        <div class="icon">
+                            <svg focusable="false" aria-hidden="true" viewBox="0 0 24 24" data-testid="PersonIcon">
+                                <path d="M12 12c2.21 0 4-1.79 4-4s-1.79-4-4-4-4 1.79-4 4 1.79 4 4 4zm0 2c-2.67 0-8 1.34-8 4v2h16v-2c0-2.66-5.33-4-8-4z"></path>
+                            </svg>
+                        </div>
+                        <div>Profile</div>
+                    </a>
+                    <a class="menuitem d-flex align-items-center" href="#">
+                        <div class="icon">
+                            <svg focusable="false" aria-hidden="true" viewBox="0 0 24 24" data-testid="LockIcon">
+                                <path d="M18 8h-1V6c0-2.76-2.24-5-5-5S7 3.24 7 6v2H6c-1.1 0-2 .9-2 2v10c0 1.1.9 2 2 2h12c1.1 0 2-.9 2-2V10c0-1.1-.9-2-2-2zm-6 9c-1.1 0-2-.9-2-2s.9-2 2-2 2 .9 2 2-.9 2-2 2zm3.1-9H8.9V6c0-1.71 1.39-3.1 3.1-3.1 1.71 0 3.1 1.39 3.1 3.1v2z"></path>
+                            </svg>
+                        </div>
+                        <div>Sign Out</div>
+                    </a>
+                </div>
+            </nav>
+        </header>
+
+    </div>
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.2.3/dist/js/bootstrap.bundle.min.js"></script>
+    <script src="assets/js/app.js"></script>
+</body>
+</html>
