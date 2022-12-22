@@ -30,7 +30,7 @@ ajaxForms.forEach((form) => {
             fetch(action, {
                 method: method,
                 body: formData,
-                headers
+                headers,
             })
                 .then(response => response.json())
                 .then(json => {
@@ -49,13 +49,45 @@ ajaxForms.forEach((form) => {
                         createToast('danger', `<div>${json.messages.join('</div><div>')}</div>`)
                     }
                 })
-
+                .catch((error) => {
+                    createToast('danger', 'Oops! We have a connection problem')
+                    if (form.getAttribute('data-sync-on-fail') === "true") {
+                        formSubmissionFailed(formData, formId)
+                    }
+                })
 
         } catch (error) {
-            console.log(error)
+            console.log('OOps', error)
         }
     })
 })
+
+function formSubmissionFailed(formData, formId) {
+    var postData
+    var storeName
+    switch (formId) {
+        case 'createPostForm':
+            postData = {
+                id: new Date().toISOString(),
+                content: formData.get('content'),
+                token: token
+            }
+            storeName = 'posts-to-send'
+            break;
+    }
+    navigator.serviceWorker.ready.then(function (swRegistration) {
+        writeData(storeName, postData)
+            .then(function () {
+                return swRegistration.sync.register('sync-new-posts');
+            })
+            .then(function () {
+                createToast('primary', 'Your post will be automatically posted when a network connection is established')
+            })
+            .catch(function (err) {
+                console.log('Post failed to be schedualed');
+            });
+    })
+}
 
 function formSubmitted(json, formId) {
     switch (formId) {
@@ -74,8 +106,9 @@ function userHasLoggedIn(json) {
 }
 
 function createToast(type = 'primary', content = '') {
+    var toastId = 'toast' + Math.random()
     var toastCode = `
-    <div id="liveToast" class="toast position-fixed bottom-0 end-0 mb-2 me-2 align-items-center text-bg-${type} border-0" role="alert" aria-live="assertive" aria-atomic="true">
+    <div id="${toastId}" class="toast position-fixed bottom-0 end-0 mb-2 me-2 align-items-center text-bg-${type} border-0" role="alert" aria-live="assertive" aria-atomic="true">
         <div class="d-flex">
             <div class="toast-body">${content}</div>
             <button type="button" class="btn-close btn-close-white me-2 m-auto" data-bs-dismiss="toast" aria-label="Close"></button>
@@ -85,15 +118,14 @@ function createToast(type = 'primary', content = '') {
     var toastContainer = document.createElement('div')
     toastContainer.innerHTML = toastCode
     document.body.appendChild(toastContainer)
-    var toastElement = document.getElementById('liveToast')
+    var toastElement = document.getElementById(toastId)
     var toast = new bootstrap.Toast(toastElement)
     toast.show()
     toastElement.addEventListener('hidden.bs.toast', (e) => {
         toastContainer.parentNode.removeChild(toastContainer)
     })
 }
-function signout()
-{
+function signout() {
     localStorage.removeItem('token')
     localStorage.removeItem('user')
     window.location.href = '/login.html'

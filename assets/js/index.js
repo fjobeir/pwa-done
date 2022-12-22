@@ -47,7 +47,6 @@ document.addEventListener('DOMContentLoaded', function () {
         if (!isFetching && hasMore && (window.innerHeight + document.documentElement.scrollTop + 100) > document.documentElement.offsetHeight) {
             isFetching = true
             currentPage++
-            
             fetchPosts(currentPage)
         }
     })
@@ -66,8 +65,11 @@ function fetchPosts(page)
         json.data.data.forEach(post => {
             createPost(post)
         });
-        isFetching = false
         hasMore = currentPage < json.data.last_page
+    }).catch(e => {
+        console.log(e)
+    }).finally(() => {
+        isFetching = false
         loading.style.display = 'none'
     })
 }
